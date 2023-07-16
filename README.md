@@ -24,11 +24,12 @@
 Получите уникальные названия районов из таблицы с адресами, которые начинаются на “K” и заканчиваются на “a” и не содержат пробелов.
 
 ```
-select district as Районы from address
-where district like 'K%a' and district not like '% %';
+SELECT DISTINCT district as Районы
+FROM address
+WHERE ((district LIKE 'K%a') AND (district NOT LIKE '% %'));
 ```
 
-![img](img/1.PNG)
+![img](img/1-1.PNG)
 
 
 ### Задание 2
@@ -66,13 +67,20 @@ order by r.rental_date desc limit 5;
 - замените буквы 'll' в именах на 'pp'.
 
 ```
-select c.first_name as Имя, c.last_name as Фамилия, lower(c.first_name) as Имя_нижний, replace(lower(c.first_name), 'll', 'pp') as Имя_замена
-from customer c
-where c.active = 1 and (trim(c.first_name) like 'Kelly' or trim(c.first_name) like 'Willie')
-order by c.last_name asc;
+SELECT 
+    LOWER(c.first_name) AS имя,
+    LOWER(c.last_name) AS фамилия,
+    REPLACE(LOWER(c.first_name), 'll', 'pp') AS имя_замена
+FROM 
+    customer c
+WHERE 
+    c.active = 1 
+    AND (TRIM(LOWER(c.first_name)) LIKE 'kelly' OR TRIM(LOWER(c.first_name)) LIKE 'willie')
+ORDER BY 
+    LOWER(c.last_name) ASC;
 ```
 
-![img](img/4.PNG)
+![img](img/4-4.PNG)
 
 ## Дополнительные задания (со звёздочкой*)
 Эти задания дополнительные, то есть не обязательные к выполнению, и никак не повлияют на получение вами зачёта по этому домашнему заданию. Вы можете их выполнить, если хотите глубже шире разобраться в материале.
